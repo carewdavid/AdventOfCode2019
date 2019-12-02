@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace aoc
+namespace AOC
 {
-    class Program
+    class Day1
     {
-        static void Main(string[] args)
+        public static void Solve(string[] args)
         {
 		int totalFuel = 0;
 		string[] lines = System.IO.File.ReadAllLines("modulemass.txt");
