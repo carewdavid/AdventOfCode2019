@@ -7,7 +7,22 @@ namespace AOC
 		public static void Solve(string[] args)
 		{
 			var input = ReadInput();
-			VM(input);
+			for(int noun = 0; noun < 100; noun++)
+			{
+				for(int verb = 0; verb < 100; verb++)
+				{
+					//Run each iteration with a fresh copy of the program
+					var program = new List<int>(input);
+					program[1] = noun;
+					program[2] = verb;
+					int result = VM(program);
+					if(result == 19690720)
+					{
+						Console.WriteLine(100 * noun + verb);
+						break;
+					}
+				}
+			}
 
 		}
 
@@ -38,8 +53,10 @@ namespace AOC
 						pc += 4;
 						break;
 					case 99:
-						Console.WriteLine(program[0]);
-						return 0;
+						return program[0];
+					default:
+						Console.Error.WriteLine($"Unknown opcode {op}");
+						return -1;
 				}
 			}
 		}
@@ -47,7 +64,6 @@ namespace AOC
 		static List<int> ReadInput()
 		{
 			string text = System.IO.File.ReadAllText("gravityassist.txt");
-			//string text = "1,9,10,3,2,3,11,0,99,30,40,50";
 			var ints = new List<int>();
 			foreach(string i in text.Split(","))
 			{
